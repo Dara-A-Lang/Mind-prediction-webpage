@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I Can Read Your Mind</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      input[type="number"] {
+        padding: 8px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        width: 120px;
+      }
+      button {
+        padding: 8px 18px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: none;
+        background: #4f8cff;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #2563eb;
+      }
+      #output {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #333;
+      }
+      #outputImg {
+        display: none;
+        margin-top: 20px;
+        max-width: 300px;
+        border-radius: 15%;
+        transition: border-radius 0.3s;
+        /* Center the image */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>I can read your mind</h1>
+      <input type="number" id="numberInput" placeholder="Enter a number" />
+      <button onclick="readMind()">Read my mind</button>
+      <div id="output"></div>
+      <img
+        id="outputImg"
+        src=""
+        alt=""
+        style="
+          margin-top: 20px;
+          max-width: 300px;
+          display: none;
+          border-radius: 15%;
+          transition: border-radius 0.3s;
+        "
+      />
+    </div>
+    <script>
+      const imageUrls = [
+        "https://png.pngtree.com/png-clipart/20241112/original/pngtree-brain-networks-illustration-png-image_16965409.png",
+        "https://www.shutterstock.com/image-photo/businesswoman-working-on-desk-office-600nw-2444095465.jpg",
+        "https://media.istockphoto.com/id/1214388808/photo/hand-power.jpg?s=612x612&w=0&k=20&c=mv5gsVPZv9AhxPLxknwgg0sNBJHsunWSguzthceC-Fc=",
+        "https://www.watercanada.net/wp-content/uploads/2018/06/molecule-compressor.jpg",
+        "",
+        "https://cdn.vectorstock.com/i/1000v/42/91/shocked-emoji-character-vector-11514291.jpg",
+      ];
+
+      // Preload images
+      imageUrls.forEach((url) => {
+        if (url) {
+          const img = new Image();
+          img.src = url;
+        }
+      });
+      function readMind() {
+        const num = document.getElementById("numberInput").value;
+        const output = document.getElementById("output");
+        const outputImg = document.getElementById("outputImg");
+        const input = document.getElementById("numberInput");
+        const button = document.querySelector("button[onclick='readMind()']");
+
+        if (!num || isNaN(num)) {
+          output.textContent = "Please enter a valid number!";
+          outputImg.style.display = "none";
+          return;
+        }
+        input.style.display = "none";
+        button.style.display = "none";
+        const phrases = [
+          "Accessing mind follicles...",
+          "Calculating brain network vibrations...",
+          "Generating magical powers...",
+          "Forming H2O molecules...",
+          "Your number is...",
+          `${num} 😱`,
+        ];
+        const images = [
+          "https://png.pngtree.com/png-clipart/20241112/original/pngtree-brain-networks-illustration-png-image_16965409.png",
+          "https://www.shutterstock.com/image-photo/businesswoman-working-on-desk-office-600nw-2444095465.jpg",
+          "https://media.istockphoto.com/id/1214388808/photo/hand-power.jpg?s=612x612&w=0&k=20&c=mv5gsVPZv9AhxPLxknwgg0sNBJHsunWSguzthceC-Fc=",
+          "https://www.watercanada.net/wp-content/uploads/2018/06/molecule-compressor.jpg",
+          "",
+          "https://cdn.vectorstock.com/i/1000v/42/91/shocked-emoji-character-vector-11514291.jpg",
+        ];
+        setTimeout(() => {
+          output.textContent = phrases[0];
+          outputImg.src = images[0];
+          outputImg.style.display = "block";
+        }, 1000);
+        for (let i = 1; i < phrases.length; i++) {
+          setTimeout(() => {
+            output.textContent = phrases[i];
+            outputImg.src = images[i];
+            outputImg.style.display = "block";
+            if (i === phrases.length - 1) {
+              setTimeout(() => {
+                input.value = "";
+                input.style.display = "";
+                button.style.display = "";
+              }, 2000);
+            }
+          }, i * 3000);
+        }
+      }
+    </script>
+  </body>
+</html>
